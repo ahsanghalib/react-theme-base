@@ -1,4 +1,5 @@
 const { override, fixBabelImports, addLessLoader } = require("customize-cra");
+const { getThemeVariables } = require("antd/dist/theme");
 
 module.exports = override(
   fixBabelImports("import", {
@@ -9,7 +10,7 @@ module.exports = override(
   addLessLoader({
     lessOptions: {
       javascriptEnabled: true,
-      modifyVars: {},
+      modifyVars: getThemeVariables({}),
     },
-  }),
+  })
 );

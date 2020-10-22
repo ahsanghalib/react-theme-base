@@ -48,7 +48,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "nodemon --watch ./config-overrides.js --exec react-app-rewired start",
     "build": "react-app-rewired build ",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
@@ -67,5 +67,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
