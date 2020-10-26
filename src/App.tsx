@@ -1,7 +1,11 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { ScaleLoader } from "react-spinners";
 import Layout from "./components/Layout";
+import PrivateRoute from "./components/PrivateRoute";
+import { FetchCurrentUser } from "./store/Effects";
+import { AppStateType } from "./types";
 
 const Login = React.lazy(() => import("./pages/Login"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -12,26 +16,38 @@ const Activities = React.lazy(() => import("./pages/Activities"));
 const Settings = React.lazy(() => import("./pages/Settings"));
 
 function App() {
+  const token = useSelector(
+    (state: AppStateType) => state.mainStore.token,
+    shallowEqual
+  );
+  const dispatch = useDispatch();
   const location = useLocation();
+
+  useEffect(() => {
+    if (token !== "") dispatch(FetchCurrentUser());
+  }, [dispatch, token]);
 
   const routes = (
     <Switch>
-      <Route path="/" exact component={Dashboard}></Route>
+      <PrivateRoute exact path="/" component={Dashboard}></PrivateRoute>
+      <PrivateRoute exact path="/siteGroups" component={Groups}></PrivateRoute>
+      <PrivateRoute
+        exact
+        path="/siteGroups/:id"
+        component={GroupDetail}
+      ></PrivateRoute>
+      <PrivateRoute
+        exact
+        path="/siteGroups/:id/createContent"
+        component={GroupContentForm}
+      ></PrivateRoute>
+      <PrivateRoute
+        exact
+        path="/activities"
+        component={Activities}
+      ></PrivateRoute>
+      <PrivateRoute exact path="/settings" component={Settings}></PrivateRoute>
       <Route path="/login" exact component={Login}></Route>
-      <Route path="/siteGroups" exact component={Groups}></Route>
-      <Route path="/siteGroups/:id" exact component={GroupDetail}></Route>
-      <Route
-        path="/siteGroups/:id/createContent"
-        exact
-        component={GroupContentForm}
-      ></Route>
-      <Route
-        path="/siteGroups/:id/createContent"
-        exact
-        component={GroupContentForm}
-      ></Route>
-      <Route path="/activities" exact component={Activities}></Route>
-      <Route path="/settings" exact component={Settings}></Route>
     </Switch>
   );
 

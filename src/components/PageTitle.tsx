@@ -9,10 +9,10 @@ interface Props {
   iconImage?: string;
   showCreateAction: boolean;
   createActionLabel?: string;
+  createBtnHanlde?: () => void;
 }
 
 const PageTitle: React.FC<Props> = (props) => {
-  console.log(props.iconImage);
   return (
     <div className="app-page-title">
       <div className="page-title-wrapper">
@@ -38,6 +38,7 @@ const PageTitle: React.FC<Props> = (props) => {
             <Button
               type="primary"
               htmlType="button"
+              onClick={props.createBtnHanlde}
             >
               <PlusOutlined />
               {props.createActionLabel ? props.createActionLabel : "Create New"}

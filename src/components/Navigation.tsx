@@ -25,9 +25,9 @@ const Navigation: React.FC<Props> = ({ collapsed, drawerClose }) => {
     >
       <div className="menu-logo">
         {collapsed ? (
-          <img src="./images/logo.png" alt="Logo" />
+          <img src={require("../assets/images/logo.png")} alt="Logo" />
         ) : (
-          <img src="./images/logo-inverse.png" alt="Logo" />
+          <img src={require("../assets/images/logo-inverse.png")} alt="Logo" />
         )}
       </div>
 
