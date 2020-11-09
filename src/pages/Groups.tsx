@@ -95,6 +95,7 @@ const Groups: React.FC = () => {
     },
   ];
 
+
   const dataSource =
     groups.length > 0
       ? groups.map((d) => {
@@ -128,7 +129,7 @@ const Groups: React.FC = () => {
           tableLayout={"fixed"}
           onRow={(rec, index) => {
             return {
-              onClick: (event) => history.push(`/siteGroups/${rec.key}`),
+              onClick: () => history.push(`/siteGroups/${rec.key}`),
             };
           }}
         />

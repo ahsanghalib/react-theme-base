@@ -11,9 +11,13 @@ const Login = React.lazy(() => import("./pages/Login"));
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Groups = React.lazy(() => import("./pages/Groups"));
 const GroupContentForm = React.lazy(() => import("./pages/GroupContentForm"));
+const GroupEditForm = React.lazy(() => import("./pages/GroupEditForm"));
+const GroupImportContentForm = React.lazy(() => import("./pages/GroupImportContentForm"));
 const GroupDetail = React.lazy(() => import("./pages/GroupDetail"));
 const Activities = React.lazy(() => import("./pages/Activities"));
 const Settings = React.lazy(() => import("./pages/Settings"));
+const GroupRequests = React.lazy(() => import("./pages/GroupRequests"));
+const ManageUsers = React.lazy(() => import("./pages/ManageUsers"));
 
 function App() {
   const token = useSelector(
@@ -43,10 +47,30 @@ function App() {
       ></PrivateRoute>
       <PrivateRoute
         exact
+        path="/siteGroups/:id/editGroup"
+        component={GroupEditForm}
+      ></PrivateRoute>
+      <PrivateRoute
+        exact
+        path="/siteGroups/:id/importContent"
+        component={GroupImportContentForm}
+      ></PrivateRoute>
+      <PrivateRoute
+        exact
         path="/activities"
         component={Activities}
       ></PrivateRoute>
       <PrivateRoute exact path="/settings" component={Settings}></PrivateRoute>
+      <PrivateRoute
+        exact
+        path="/manageUsers"
+        component={ManageUsers}
+      ></PrivateRoute>
+      <PrivateRoute
+        exact
+        path="/groupRequests"
+        component={GroupRequests}
+      ></PrivateRoute>
       <Route path="/login" exact component={Login}></Route>
     </Switch>
   );

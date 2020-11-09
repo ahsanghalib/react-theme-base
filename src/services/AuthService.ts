@@ -1,13 +1,13 @@
 import * as Msal from "msal";
 import { userLogoutAction } from "../store/Actions";
-import {store} from '../store/ConfigStore'
+import { store } from "../store/ConfigStore";
 
 export default class AuthService {
   private graphScopes: string[] = [];
   private msal: Msal.UserAgentApplication;
 
   constructor() {
-    let redirectUri = "https://javat365.apaekgroup.com/";
+    let redirectUri = "https://react-javat365.ahsanghalib.vercel.app";
     if (
       window.location.hostname === "127.0.0.1" ||
       window.location.hostname === "localhost"
@@ -69,9 +69,9 @@ export default class AuthService {
           },
           (err) => {
             console.info("error fetching token");
-            store.dispatch(userLogoutAction())
+            store.dispatch(userLogoutAction());
             // this.logout()
-            throw new Error(err)
+            throw new Error(err);
           }
         );
       });

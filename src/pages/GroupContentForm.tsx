@@ -23,8 +23,7 @@ const GroupContentForm: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // @ts-ignore
-  const { id } = useParams();
+  const { id } = useParams<any>();
 
   useEffect(() => {
     if (id) {
@@ -81,6 +80,7 @@ const GroupContentForm: React.FC = () => {
             ? `Create Content in ${siteGroup.displayName}`
             : "Create Content in Group"
         }
+        groupVisibitliy={siteGroup.visibility}
         subheading="Manage group content."
         showCreateAction={false}
         icon={"pe-7s-folder icon-gradient bg-happy-itmeo"}

@@ -86,6 +86,32 @@ const Navigation: React.FC<Props> = ({ collapsed, drawerClose }) => {
           </div>
         </Link>
       </Menu.Item>
+
+      <Menu.Item
+        key="manageUsers"
+        title="Manage Users"
+        onClick={drawerClose ? () => drawerClose(false) : undefined}
+      >
+        <Link to="/manageUsers">
+          <div className="menu-item">
+            <i className="pe-7s-users"></i>
+            {!collapsed && <span>Manage Users</span>}
+          </div>
+        </Link>
+      </Menu.Item>
+
+      <Menu.Item
+        key="groupRequests"
+        title="Group Requests"
+        onClick={drawerClose ? () => drawerClose(false) : undefined}
+      >
+        <Link to="/groupRequests">
+          <div className="menu-item">
+            <i className="pe-7s-bell"></i>
+            {!collapsed && <span>Group Requests</span>}
+          </div>
+        </Link>
+      </Menu.Item>
     </Menu>
   );
 };

@@ -12,7 +12,7 @@ import {
   fetchSiteGroupAction,
   fetchSiteGroupsAction,
   fetchStatsAction,
-  loadingAction
+  loadingAction,
 } from "./Actions";
 
 type Effect = ThunkAction<any, AppStateType, any, ActionsType>;
@@ -291,4 +291,19 @@ export function TogglePublishedContent(
       dispatch(loadingAction(false));
     }
   };
+}
+
+export async function GetPhotos(photoUrl: string) {
+  const token = (await authService.getToken()) || "";
+  if (token !== "") {
+    api.saveToken(token);
+    try {
+      let image = await api.photo(photoUrl);
+      let raw = Buffer.from(image.data).toString("base64");
+      return "data:" + image.headers["content-type"] + ";base64," + raw;
+    } catch (err) {
+      console.log(err);
+      new Error(err);
+    }
+  }
 }

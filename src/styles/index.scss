@@ -298,6 +298,27 @@ h6 {
   }
 }
 
+.import-content-form {
+  .form {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    column-gap: 10px;
+    align-items: center;
+
+    .label {
+      text-align: right;
+    }
+
+    .field {
+      width: 100%;
+    }
+
+    .btn {
+      text-align: left;
+    }
+  }
+}
+
 // helpers
 .icon-gradient {
   -webkit-background-clip: text;

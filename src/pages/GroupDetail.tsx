@@ -23,8 +23,7 @@ const GroupDetail: React.FC = () => {
 
   const [publish, setPublish] = useState<boolean>(true);
 
-  // @ts-ignore
-  const { id } = useParams();
+  const { id } = useParams<any>();
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -146,11 +145,16 @@ const GroupDetail: React.FC = () => {
         heading={
           siteGroup.displayName.length > 0 ? siteGroup.displayName : "Group"
         }
+        groupVisibitliy={siteGroup.visibility}
         subheading="Manage group content."
         showCreateAction={siteGroup.isOwner}
         createActionLabel={"Create Content"}
         icon={"pe-7s-folder icon-gradient bg-happy-itmeo"}
         createBtnHanlde={() => history.push(`/siteGroups/${id}/createContent`)}
+        editBtnHandle={() => history.push(`/siteGroups/${id}/editGroup`)}
+        importBtnHandle={() => history.push(`/siteGroups/${id}/importContent`)}
+        showEditBtn={siteGroup.isOwner}
+        showImportBtn={siteGroup.isOwner}
       />
       <div className="page-container">
         <div

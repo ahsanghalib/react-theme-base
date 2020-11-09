@@ -4,16 +4,17 @@ import { store } from "../store/ConfigStore";
 
 let env = process.env.NODE_ENV || "local";
 let config = require(`../../config.${env}.json`);
-// let config = require('../../config.');
-// import store from "../store";
 
 let http: AxiosInstance;
+config.apiUrl = "https://api.dev.javat365.apekgroup.com/";
 
 class APIProvider {
   constructor() {
     http = axios.create({
       baseURL: config.apiUrl,
     });
+
+    console.log(config.apiUrl);
 
     http.defaults.headers.common["Content-Type"] =
       "application/json;charset=UTF-8";
@@ -76,6 +77,10 @@ class APIProvider {
     return http.get(payload.resource, {
       params: payload.query,
     });
+  }
+
+  photo(url: string) {
+    return axios.get(url, { responseType: "arraybuffer" });
   }
 
   get(payload: { resource: string; id?: string; query?: any }) {
