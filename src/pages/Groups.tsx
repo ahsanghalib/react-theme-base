@@ -1,5 +1,5 @@
 import { UsergroupAddOutlined } from "@ant-design/icons";
-import { Avatar, Input, Modal, Table, Tag } from "antd";
+import { Avatar, Form, Input, Modal, Radio, Table, Tag } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
@@ -8,9 +8,15 @@ import PageTitle from "../components/PageTitle";
 import { CreateGroup, FetchSiteGroups } from "../store/Effects";
 import { AppStateType } from "../types";
 
+interface FormFields {
+  groupName: string;
+  visibility: string;
+  desc: string;
+}
+
 const Groups: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [groupName, setGroupName] = useState<string>("");
+  const [form] = Form.useForm<FormFields>();
 
   const groups = useSelector(
     (state: AppStateType) => state.mainStore.siteGroups,
@@ -22,6 +28,12 @@ const Groups: React.FC = () => {
     shallowEqual
   );
 
+  const initialValues: FormFields = {
+    groupName: "",
+    visibility: "public",
+    desc: "",
+  };
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -29,12 +41,10 @@ const Groups: React.FC = () => {
     dispatch(FetchSiteGroups());
   }, [dispatch]);
 
-  const createGroupHandle = () => {
+  const createGroupHandle = (values: any) => {
+    console.log(values);
+    dispatch(CreateGroup({ name: values.groupName, desc: values.desc }));
     setShowModal(false);
-    if (groupName && groupName.length !== 0) {
-      dispatch(CreateGroup({ name: groupName, desc: "Test Group (React)" }));
-      setGroupName("");
-    }
   };
 
   const columns = [
@@ -95,7 +105,6 @@ const Groups: React.FC = () => {
     },
   ];
 
-
   const dataSource =
     groups.length > 0
       ? groups.map((d) => {
@@ -136,20 +145,53 @@ const Groups: React.FC = () => {
       </div>
 
       <Modal
-        title="CREATE GROUP"
+        title="Create new Group"
         visible={showModal}
-        onOk={createGroupHandle}
+        okText="Create Group"
+        cancelText="Cancel"
+        onOk={() => {
+          form
+            .validateFields()
+            .then((values) => {
+              form.resetFields();
+              createGroupHandle(values);
+            })
+            .catch((info) => console.log(info));
+        }}
         okButtonProps={{ htmlType: "submit" }}
         onCancel={() => setShowModal(false)}
       >
-        <Input
-          size="large"
-          placeholder="large size"
-          name="groupName"
-          id="groupName"
-          value={groupName}
-          onChange={(event) => setGroupName(event.target.value)}
-        />
+        <Form
+          form={form}
+          initialValues={initialValues}
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 18 }}
+        >
+          <Form.Item
+            label="Group Name"
+            name="groupName"
+            rules={[{ required: true, message: "Required" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Description"
+            name="desc"
+            rules={[{ required: false }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Visibility"
+            name="visibility"
+            rules={[{ required: true, message: "Required" }]}
+          >
+            <Radio.Group buttonStyle="outline">
+              <Radio.Button value="public">Public</Radio.Button>
+              <Radio.Button value="private">Private</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

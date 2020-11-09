@@ -1,6 +1,6 @@
-import { Button, Collapse, Form, Input, Radio } from "antd";
+import { Button, Collapse, Input, Radio } from "antd";
 import React from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import PageTitle from "../components/PageTitle";
 import { AppStateType } from "../types";
@@ -11,7 +11,6 @@ const GroupImportContentForm: React.FC = () => {
     shallowEqual
   );
 
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const { id } = useParams<any>();
