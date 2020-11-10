@@ -42,13 +42,13 @@ const Activities: React.FC = () => {
   const dataSource =
     events.length > 0
       ? events.map((d) => {
-          return {
-            key: d.id,
-            action: d.action.toUpperCase(),
-            date: dayjs(d.createdAt).format("MMM DD, YYYY"),
-            title: d.title,
-          };
-        })
+        return {
+          key: d.id,
+          action: d.action.toUpperCase(),
+          date: dayjs(d.createdAt).format("MMM DD, YYYY"),
+          title: d.title,
+        };
+      })
       : [];
 
   return (

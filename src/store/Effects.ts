@@ -21,7 +21,7 @@ const authService = new AuthService();
 const graphService = new GraphService();
 
 export function UserLogin(history: History, path: string): Effect {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(loadingAction(true));
       const user = await authService.login();
@@ -61,7 +61,7 @@ export function UserLogin(history: History, path: string): Effect {
 // }
 
 export function FetchCurrentUser(): Effect {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(loadingAction(true));
       const res = await api.get({ resource: "users", id: "me" });
@@ -74,7 +74,7 @@ export function FetchCurrentUser(): Effect {
 }
 
 export function FetchStats(): Effect {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(loadingAction(true));
       const token = (await authService.getToken()) || "";
@@ -97,7 +97,7 @@ export function FetchStats(): Effect {
 }
 
 export function FetchEventLogs(): Effect {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(loadingAction(true));
       const token = (await authService.getToken()) || "";
@@ -121,7 +121,7 @@ export function FetchEventLogs(): Effect {
 }
 
 export function FetchSiteGroups(): Effect {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(loadingAction(true));
       const token = (await authService.getToken()) || "";
@@ -145,7 +145,7 @@ export function FetchSiteGroups(): Effect {
 }
 
 export function CreateGroup(data: { name: string; desc: string }): Effect {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(loadingAction(true));
       const token = (await authService.getToken()) || "";
@@ -172,7 +172,7 @@ export function CreateGroup(data: { name: string; desc: string }): Effect {
 }
 
 export function FetchSiteGroup(groupId: string): Effect {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(loadingAction(true));
       const token = (await authService.getToken()) || "";
@@ -196,7 +196,7 @@ export function FetchSiteGroup(groupId: string): Effect {
 }
 
 export function FetchFeedItems(groupId: string): Effect {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(loadingAction(true));
       const token = (await authService.getToken()) || "";
@@ -233,7 +233,7 @@ export function CreateGroupContent(
   history: History,
   path: string
 ): Effect {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(loadingAction(true));
       const token = (await authService.getToken()) || "";
@@ -265,7 +265,7 @@ export function TogglePublishedContent(
   objectId: string,
   type: string
 ): Effect {
-  return async function (dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(loadingAction(true));
       const token = (await authService.getToken()) || "";

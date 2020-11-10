@@ -33,6 +33,4 @@ export default class GraphService {
       throw new Error(err.text());
     }
   }
-
-  
 }

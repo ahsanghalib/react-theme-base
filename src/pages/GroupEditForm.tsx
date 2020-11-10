@@ -250,7 +250,7 @@ const GroupEditForm: React.FC = () => {
                 dataSource={dataSource}
                 columns={columns}
                 pagination={false}
-                size="middle"
+                size="small"
                 scroll={{ x: true, y: 250 }}
                 tableLayout={"fixed"}
               />
