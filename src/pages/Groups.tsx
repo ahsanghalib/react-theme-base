@@ -1,5 +1,5 @@
 import { UsergroupAddOutlined } from "@ant-design/icons";
-import { Avatar, Form, Input, Modal, Radio, Table, Tag } from "antd";
+import { Avatar, Form, Input, Modal, Radio, Select, Table, Tag } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ interface FormFields {
   groupName: string;
   visibility: string;
   desc: string;
+  owners: string[];
 }
 
 const Groups: React.FC = () => {
@@ -32,6 +33,7 @@ const Groups: React.FC = () => {
     groupName: "",
     visibility: "public",
     desc: "",
+    owners: [],
   };
 
   const dispatch = useDispatch();
@@ -190,6 +192,18 @@ const Groups: React.FC = () => {
               <Radio.Button value="public">Public</Radio.Button>
               <Radio.Button value="private">Private</Radio.Button>
             </Radio.Group>
+          </Form.Item>
+          <Form.Item
+            label="Owners"
+            name="owners"
+            rules={[{ required: true, message: "Required" }]}
+          >
+            <Select mode="multiple" placeholder="Select owners">
+              <Select.Option value="owner1">Owner 1</Select.Option>
+              <Select.Option value="owner2">Owner 2</Select.Option>
+              <Select.Option value="owner3">Owner 3</Select.Option>
+              <Select.Option value="owner4">Owner 4</Select.Option>
+            </Select>
           </Form.Item>
         </Form>
       </Modal>
